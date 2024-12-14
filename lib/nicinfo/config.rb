@@ -187,7 +187,7 @@ module NicInfo
       retval = default
       if File.exist?( file_name )
         data_file = File.open( File.join( @app_data, name ), "r" )
-        retval = YAML::load( data_file )
+        retval = YAML::load( data_file, permitted_classes: [NicInfo::DataTree,NicInfo::Logger,NicInfo::DataNode,IO,Rainbow::Wrapper], aliases: true )
         data_file.close
       elsif default == nil
         raise "#{file_name} does not exist"
